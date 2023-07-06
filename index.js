@@ -64,7 +64,7 @@ function playRound(playerChoice, computerChoice){
 }
 
 function gameOver(winner, loser){
-    winner.textContent = 'You Win!';
+    winner.textContent = 'Win!';
     playerCounter = 0;
     computerCounter = 0;
     setTimeout(() => {
