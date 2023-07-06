@@ -1,7 +1,24 @@
+
+const typeed = new Typed('.entryWelcome', {
+    strings: ["Where men-kind strikes with computer",
+    "the first reaching 5 points wins the game",
+    "The game starts again continuously!.",
+    "Good Luck!"],
+    typeSpeed: 40,
+    backSpeed: 30,
+    showCursor: false,
+});
+
 const choices = ['rock', 'paper', 'scissor']; 
+const buttons = document.querySelectorAll('.button');
+const menResult = document.querySelector('.men__result');
+const computerResult = document.querySelector('.computer__result');
 let playerChoice;
 let computerChoice;
-let gameCounter = 0;
+let playerCounter = 0;
+let computerCounter = 0;
+
+buttons.forEach(button => button.addEventListener('click',game));
 
 function getComputerChoice(){
     const choice = Math.floor(Math.random() * choices.length);
@@ -10,34 +27,59 @@ function getComputerChoice(){
 
 function playRound(playerChoice, computerChoice){
     if(playerChoice === computerChoice){
-        return 'It is a tie!';
+        document.querySelector('.tie').style.visibility = 'visible';
+        setTimeout(() => 
+        {
+            document.querySelector('.tie').style.visibility = 'hidden';
+        }, 500);
     }else if(playerChoice === 'rock' && computerChoice === 'scissor'){
-        return 'You wins';
+        playerCounter+=1;
+        menResult.textContent = playerCounter;
+        document.querySelector(`[data-key='${computerChoice}'`).classList.add('comChoice');
+        setTimeout(() => {
+            document.querySelector(`[data-key='${computerChoice}'`).classList.remove('comChoice');
+        },500)
     }else if(playerChoice === 'scissor' && computerChoice === 'paper'){
-        return 'You wins';
+        playerCounter+=1;
+        menResult.textContent = playerCounter;
+        document.querySelector(`[data-key='${computerChoice}'`).classList.add('comChoice');
+        setTimeout(() => {
+            document.querySelector(`[data-key='${computerChoice}'`).classList.remove('comChoice');
+        },500)
     }else if(playerChoice === 'paper' && computerChoice === 'rock'){
-        return 'You wins';
+        playerCounter+=1;
+        menResult.textContent = playerCounter;
+        document.querySelector(`[data-key='${computerChoice}'`).classList.add('comChoice');
+        setTimeout(() => {
+            document.querySelector(`[data-key='${computerChoice}'`).classList.remove('comChoice');
+        },500)
     }else{
-        return 'Computer wins';
+        computerCounter+=1;
+        computerResult.textContent = computerCounter;
+        document.querySelector(`[data-key='${computerChoice}'`).classList.add('comChoice');
+        setTimeout(() => {
+            document.querySelector(`[data-key='${computerChoice}'`).classList.remove('comChoice');
+        },500)
     }
 }
 
-function game(){
-    for(let i = 0; i<5; i++){
-        playerChoice = prompt('What do you want to choose?: ');
-        computerChoice = getComputerChoice();
-        if(playRound(playerChoice, computerChoice) === 'You wins'){
-            gameCounter++;
-        }else if(playRound(playerChoice, computerChoice) === 'Computer wins'){
-            gameCounter--;
-        }
-        alert(playRound(playerChoice, computerChoice));           
-    }
-    if(gameCounter > 0){
-        console.log('You win the game');
-    }else if(gameCounter < 0){
-        console.log('Computer wins');
-    }else{
-        console.log('Game ends with a tie');
+function gameOver(winner, loser){
+    winner.textContent = 'You Win!';
+    playerCounter = 0;
+    computerCounter = 0;
+    setTimeout(() => {
+        winner.textContent = 0;
+        loser.textContent = 0;
+    }, 1000)
+}
+
+function game(e){
+    playerChoice = this.dataset.key;
+    computerChoice = getComputerChoice();
+    playRound(playerChoice, computerChoice);           
+    if(playerCounter == 5){
+        gameOver(menResult, computerResult)
+    }else if(computerCounter == 5){
+        gameOver(computerResult, menResult)
     }
 }

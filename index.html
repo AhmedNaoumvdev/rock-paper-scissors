@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tic-tac-toe</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
+    <h1>Rock-Paper-Scissor</h1>
+    <h2>Welcome to Rock-Paper-Scissor game</h2>
+    <h2 class="entryWelcome"></h2>
+    <div class="game">
+        <div class="button" data-key="rock">
+            <img src="./images/fist.png">
+        </div>
+        <div class="button" data-key="paper">
+            <img src="./images/hello.png">
+        </div>
+        <div class="button" data-key="scissor">
+            <img src="./images/scissors.png">
+        </div>
+    </div>
+    <h2 class="tie">Tie!</h2>
+    <div class="results">
+        <div class="men">
+            <h1>You</h1>
+            <h2 class="men__result">0</h2>
+        </div>
+        <div class="computer">
+            <h1>Computer</h1>
+            <h2 class="computer__result">0</h2>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright &copy <span>Ahmed Naoum <img src="./images/github.png" alt=""></span></p>
+    </footer>
+
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="./index.js"></script>
 </body>
 </html>
